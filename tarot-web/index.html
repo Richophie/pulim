@@ -15,6 +15,7 @@ const majors=[["The Fool","바보","시작, 자유, 가능성","충동, 준비 �
 const suits=[["wands","완드","열정, 추진, 창의성","소진, 충돌, 산만함"],["cups","컵","감정, 관계, 공감","감정 기복, 거리감, 미련"],["swords","소드","생각, 판단, 진실","혼란, 갈등, 과잉 사고"],["pentacles","펜타클","현실, 자원, 안정","지체, 불안, 자원 점검"]];
 const ranks=[["Ace","에이스"],["Two","2"],["Three","3"],["Four","4"],["Five","5"],["Six","6"],["Seven","7"],["Eight","8"],["Nine","9"],["Ten","10"],["Page","페이지"],["Knight","나이트"],["Queen","퀸"],["King","킹"]];
 const fallback=[...majors.map((a,i)=>({id:"ar"+i,name:a[0],ko:a[1],up:a[2],down:a[3],image:"https://petaloverflow.github.io/tarot-api/cards/ar"+String(i).padStart(2,"0")+".jpg"})),...suits.flatMap(s=>ranks.map((r,i)=>({id:s[0]+i,name:r[0]+" of "+s[0],ko:s[1]+" "+s[1],up:s[2],down:s[3],image:""})))];
+fallback.forEach(c=>{if(!c.image){const suitCode={wands:"wa",cups:"cu",swords:"sw",pentacles:"pe"}[c.id.replace(/[0-9]+$/,"")];const idx=Number(c.id.match(/[0-9]+$/)?.[0]);const rankCode=idx===0?"ac":idx===10?"pa":idx===11?"kn":idx===12?"qu":idx===13?"ki":String(idx+1).padStart(2,"0");if(suitCode)c.image="https://petaloverflow.github.io/tarot-api/cards/"+suitCode+rankCode+".jpg"}});
 const spreads=[
 {id:"one",name:"오늘의 메시지",labels:["핵심 메시지"],description:"지금 가장 필요한 한 가지 메시지"},
 {id:"two",name:"상황과 조언",labels:["현재 상황","실천할 조언"],description:"상황을 바라보고 다음 행동을 생각합니다"},
